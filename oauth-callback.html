@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAuth Callback</title>
+</head>
+<body>
+    <h2>Processing OAuth Response...</h2>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const authCode = urlParams.get("code");
+
+        if (authCode) {
+            localStorage.setItem("auth_code", authCode);
+            document.body.innerHTML = `<h2>Authentication Successful!</h2><p>Code: ${authCode}</p>`;
+        } else {
+            document.body.innerHTML = `<h2>Error: No auth code received!</h2>`;
+        }
+    </script>
+</body>
+</html>
