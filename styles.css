@@ -1411,3 +1411,78 @@ tr:nth-child(even){
    }
 
 }
+
+.upload-section {
+   max-width: 600px;
+   margin: 40px auto;
+   padding: 20px;
+   background: #f4f4f4;
+   border-radius: 10px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   text-align: center;
+}
+
+.upload-section h2 {
+   margin-bottom: 20px;
+}
+
+.upload-section input,
+.upload-section select,
+.upload-section button {
+   width: 100%;
+   padding: 10px;
+   margin: 10px 0;
+   border-radius: 5px;
+   border: 1px solid #ccc;
+}
+
+.upload-section button {
+   background-color: #ff5722;
+   color: white;
+   cursor: pointer;
+}
+
+.upload-section button:hover {
+   background-color: #e64a19;
+}
+
+
+/* Sidebar và bảng trong Dark Mode */
+body.dark .side-bar,
+body.dark .profile,
+body.dark .search-form,
+body.dark .upload-section {
+    background-color: var(--white);
+    color: var(--light-color);
+    border: var(--border);
+}
+
+/* Các input, select, button trong Dark Mode */
+body.dark input,
+body.dark select,
+body.dark button {
+    background-color: #333;
+    color: white;
+    border: 1px solid #555;
+}
+
+/* Màu nút hover */
+body.dark button:hover {
+    background-color: #e64a19;
+}
+
+/* Dark Mode cho bảng */
+body.dark table {
+    background-color: var(--white);
+    color: var(--light-color);
+    border: var(--border);
+}
+
+body.dark th {
+    background-color: #444;
+    color: white;
+}
+
+body.dark tr:nth-child(even) {
+    background-color: #333;
+}
