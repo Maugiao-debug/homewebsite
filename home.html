@@ -1,74 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="styles.css">
-   <title>home</title>
-
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
-
-   <link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học lý chị Trân</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+    <div class="title">
+        <div id="title">Học lý chị Trân</div>
+        <div class="nav">
+            <a href="#" id="home">Trang chủ</a>
+            <a href="#" id="on-thi">Góp ý</a>
+        </div>
+        <div class="menu">
+            <a href="#">
+                <i class='bx bx-menu'></i>
+            </a>
+        </div>
+    </div> 
 
-<header class="header">
-   <section class="flex">
-      <a class="logo">Trang chủ</a>
+    <div class="main">
+        <div class="logo">
+            <img src="images/logo.png" id="logo-image">
+            <div class="colum">
+                <p id="logo-title">Học lý chị Trân</p>
+                <p id="caption">🌝Vạn vật lý thú</p>
+            </div>
+        </div>
+    
+        <div class="star">
+            <a href="https://youtu.be/7ZIXddOFt-M">
+                <button id="downloadLatestVideo">Tải video mới nhất</button>
+            </a>
+            
+            <a href="https://drive.google.com/file/d/1bxgwIC4CshBmIsKx4NW37rSb4C5lQCMj/view?usp=sharing">
+                <button id="downloadLatestDoc">Tải tài liệu mới nhất</button>
+            </a>
 
-      <form action="search.html" method="post" class="search-form">
-         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
-         <button type="submit" class="fas fa-search"></button>
-      </form>
+            <a href="#">
+                <button id="downloadLatestDoc">Tải tài liệu ôn thi</button>
+            </a>
+            
+        </div>
 
-      <div class="icons">
-         <div id="menu-btn" class="fas fa-bars"></div>
-         <div id="search-btn" class="fas fa-search"></div>
-         <div id="user-btn" class="fas fa-user"></div>
-         <div id="toggle-btn" class="fas fa-sun"></div>
-      </div>
+        <div class="information">
+            <div class="video-container" id="videoContainer"></div>
+        </div>
+    </div>
 
-      <div class="profile">
-         <img src="images/Cocotan.jpg" class="image" alt="">
-         <h3 class="name">Cokotan</h3>
-         <p class="role">Học sinh</p>
-         <a href="upLoad.html" class="btn">Upload Video</a>
-      </div>
-   </section>
-</header>   
+    <div class="pagination">
+        <button id="prevPage">Trước</button>
+        <span id="pageNumber"></span>
+        <button id="nextPage">Tiếp</button>
+    </div>
+    
 
-<div class="side-bar">
-   <div id="close-btn">
-      <i class="fas fa-times"></i>
-   </div>
-
-   <div class="profile">
-      <img src="images/Cocotan.jpg" class="image" alt="">
-      <h3 class="name">Cokotan</h3>
-      <p class="role">Học sinh</p>
-      <a href="upLoad.html" class="btn">Upload Video</a>
-   </div>
-
-   <nav class="navbar">
-      <a href="home.html"><i class="fas fa-home"></i><span>Trang chủ</span></a>
-      <a href="about.html"><i class="fas fa-question"></i><span>Về chúng tôi</span></a>
-      <a href="teachers.html"><i class="fas fa-chalkboard-user"></i><span>Giáo viên</span></a>
-      <a href="contact.html"><i class="fas fa-headset"></i><span>Góp ý</span></a>
-   </nav>
-</div>
-
-<section class="home-grid">
-
-   <h1 class="heading">Vật lý</h1>
-
-   <div class="time">
-      <a href="vat_ly_time.html"><button class="btn"> Bài học theo mốc thời gian</button></a>
-   </div>
-</section>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
