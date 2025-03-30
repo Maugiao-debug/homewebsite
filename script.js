@@ -1,176 +1,85 @@
-// 🌙 Dark Mode Toggle
-const toggleBtn = document.getElementById("toggle-btn");
-const body = document.body;
-const darkMode = localStorage.getItem("dark-mode");
+document.addEventListener("DOMContentLoaded", function () {
+    const videoContainer = document.querySelector(".video-container");
+    const prevButton = document.getElementById("prevPage");
+    const nextButton = document.getElementById("nextPage");
+    const pageNumber = document.getElementById("pageNumber");
 
-if (darkMode === "enabled") {
-  body.classList.add("dark");
-  toggleBtn.classList.replace("fa-sun", "fa-moon");
-}
+    const videoLinks = [
+        "HqphVfNw8pM", "ocH25NyFkDs", "DpYn_S2gU1s", "CnG1m06KcnU", "OVq7CiFqWfk",
+        "wBO62lxfYMc", "IpUEkRpm8ZQ", "2m1IaWraAxU", "o5wyeAnsqzQ", "FKxwdsJVozY",
+        "n1g6aArl_s8", "kP9x2d1E_hY", "s3YCsOCcfEI", "dCMpVlas7-Y", "75-jm6qiKhs"
+    ].reverse(); // Đảo ngược video mới nhất lên đầu
 
-toggleBtn.onclick = () => {
-  if (body.classList.contains("dark")) {
-    body.classList.remove("dark");
-    toggleBtn.classList.replace("fa-moon", "fa-sun");
-    localStorage.setItem("dark-mode", "disabled");
-  } else {
-    body.classList.add("dark");
-    toggleBtn.classList.replace("fa-sun", "fa-moon");
-    localStorage.setItem("dark-mode", "enabled");
-  }
-};
+    let currentPage = 1;
+    const videosPerPage = 6;
+    const totalPages = Math.ceil(videoLinks.length / videosPerPage);
 
-// 📌 Xử lý giao diện người dùng
-const profile = document.querySelector(".header .flex .profile");
-document.querySelector("#user-btn").onclick = () => {
-  profile.classList.toggle("active");
-  search.classList.remove("active");
-};
+    function loadVideos(page) {
+        videoContainer.innerHTML = ""; // Xóa video cũ
 
-const search = document.querySelector(".header .flex .search-form");
-document.querySelector("#search-btn").onclick = () => {
-  search.classList.toggle("active");
-  profile.classList.remove("active");
-};
+        const start = (page - 1) * videosPerPage;
+        const end = start + videosPerPage;
+        const videosToShow = videoLinks.slice(start, end);
 
-const sideBar = document.querySelector(".side-bar");
-document.querySelector("#menu-btn").onclick = () => {
-  sideBar.classList.toggle("active");
-  body.classList.toggle("active");
-};
+        videosToShow.forEach(videoId => {
+            const videoBox = document.createElement("div");
+            videoBox.classList.add("video-box");
 
-document.querySelector("#close-btn").onclick = () => {
-  sideBar.classList.remove("active");
-  body.classList.remove("active");
-};
+            const iframe = document.createElement("iframe");
+            iframe.src = `https://www.youtube.com/embed/${videoId}`;
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+            iframe.allowFullscreen = true;
 
-window.onscroll = () => {
-  profile.classList.remove("active");
-  search.classList.remove("active");
+            videoBox.appendChild(iframe);
+            videoContainer.appendChild(videoBox);
+        });
 
-  if (window.innerWidth < 1200) {
-    sideBar.classList.remove("active");
-    body.classList.remove("active");
-  }
-};
-
-// 🔑 Kiểm tra mật khẩu trước khi upload
-const CORRECT_PASSWORD = "0UzJF&6daAN3$d!M";
-
-function checkPassword() {
-  const passwordInput = document.getElementById("password").value;
-  const uploadBtn = document.getElementById("uploadBtn");
-
-  if (passwordInput === CORRECT_PASSWORD) {
-    alert("✅ Mật khẩu đúng! Bạn có thể upload video.");
-    uploadBtn.disabled = false;
-  } else {
-    alert("❌ Mật khẩu sai! Vui lòng thử lại.");
-    uploadBtn.disabled = true;
-  }
-}
-
-// 🎥 Upload Video lên YouTube
-async function uploadVideo() {
-  const fileInput = document.getElementById("videoInput");
-  const titleInput = document.getElementById("videoTitle").value.trim();
-  const privacyStatus = document.getElementById("privacyStatus").value;
-
-  if (!fileInput.files.length) {
-    alert("⚠️ Vui lòng chọn video.");
-    return;
-  }
-  if (!titleInput) {
-    alert("⚠️ Vui lòng nhập tiêu đề video.");
-    return;
-  }
-
-  document.getElementById("status").innerText = "⏳ Đang tải lên...";
-
-  try {
-    const accessToken = await getAccessToken();
-    if (!accessToken) {
-      document.getElementById("status").innerText = "❌ Lỗi xác thực!";
-      return;
+        pageNumber.innerText = `Trang ${currentPage} / ${totalPages}`;
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage === totalPages;
     }
 
-    const file = fileInput.files[0];
-    const metadata = {
-      snippet: {
-        title: titleInput,
-        description: "Uploaded via API",
-        tags: ["test", "api"],
-        categoryId: "22",
-      },
-      status: {
-        privacyStatus: privacyStatus,
-      },
-    };
-
-    const formData = new FormData();
-    formData.append(
-      "metadata",
-      new Blob([JSON.stringify(metadata)], { type: "application/json" })
-    );
-    formData.append("video", file);
-
-    const uploadUrl =
-      "https://www.googleapis.com/upload/youtube/v3/videos?uploadType=multipart&part=snippet,status";
-
-    const res = await fetch(uploadUrl, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${accessToken}` },
-      body: formData,
+    prevButton.addEventListener("click", function () {
+        if (currentPage > 1) {
+            currentPage--;
+            loadVideos(currentPage);
+        }
     });
 
-    const result = await res.json();
-    if (result.id) {
-      document.getElementById(
-        "status"
-      ).innerText = `✅ Upload thành công! Video ID: ${result.id} (${privacyStatus})`;
-    } else {
-      throw new Error("Upload thất bại: " + JSON.stringify(result));
-    }
-  } catch (error) {
-    document.getElementById("status").innerText =
-      "❌ Upload lỗi: " + error.message;
-    console.error(error);
-  }
-}
-
-// 🚀 Lấy Access Token từ Google OAuth 2.0
-const CLIENT_ID =
-  "362075565125-cdae02eaqqh3vqtgolqdab4gbk3vqu44.apps.googleusercontent.com";
-const CLIENT_SECRET = "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";
-const REFRESH_TOKEN =
-  "1//0emJ826LAigdbCgYIARAAGA4SNwF-L9Irva8a3-gGMQKiUjzL9mW7eRJXYJPrN2sNJeXDAD9gO_3Spm7ZdBZQjSKsH6aE_5APi20";
-
-async function getAccessToken() {
-  try {
-    const response = await fetch("https://oauth2.googleapis.com/token", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        client_id: CLIENT_ID,
-        client_secret: CLIENT_SECRET,
-        refresh_token: REFRESH_TOKEN,
-        grant_type: "refresh_token",
-      }),
+    nextButton.addEventListener("click", function () {
+        if (currentPage < totalPages) {
+            currentPage++;
+            loadVideos(currentPage);
+        }
     });
 
-    const data = await response.json();
-    if (data.access_token) {
-      console.log("✅ Access Token lấy thành công!");
-      return data.access_token;
-    } else {
-      console.error("❌ Lỗi khi lấy Access Token:", data);
-      document.getElementById("status").innerText = "❌ Lỗi lấy Access Token!";
-      return null;
-    }
-  } catch (error) {
-    console.error("❌ Lỗi kết nối:", error);
-    document.getElementById("status").innerText =
-      "❌ Lỗi kết nối khi lấy Access Token!";
-    return null;
-  }
-}
+    loadVideos(currentPage); // Load trang đầu tiên
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const logo = document.querySelector(".main .logo");
+
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 50) {
+            logo.classList.add("shrink");
+        } else {
+            logo.classList.remove("shrink");
+        }
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const logo = document.querySelector(".main .logo");
+    const logoText = document.querySelector(".main .logo .colum");
+
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 50) {
+            logo.classList.add("shrink");
+            logoText.classList.add("remove"); // Ẩn chữ
+        } else {
+            logo.classList.remove("shrink");
+            logoText.classList.remove("remove"); // Hiện lại chữ
+        }
+    });
+});
