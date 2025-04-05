@@ -5,9 +5,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const pageNumber = document.getElementById("pageNumber");
 
     const videoLinks = [
-        "HqphVfNw8pM","HqphVfNw8pM", "ocH25NyFkDs", "DpYn_S2gU1s", "CnG1m06KcnU", "OVq7CiFqWfk",
-        "wBO62lxfYMc", "IpUEkRpm8ZQ", "2m1IaWraAxU", "o5wyeAnsqzQ", "FKxwdsJVozY",
-        "n1g6aArl_s8", "kP9x2d1E_hY", "s3YCsOCcfEI", "dCMpVlas7-Y", "75-jm6qiKhs"
+        "296MCRk9eKY",
+    "99TqSJGd10U",
+    "QS1ggZk8M0Q",
+    "7ZIXddOFt-M",
+    "xwlLNY_EO3Q",
+    "75-jm6qiKhs",
+    "dCMpVlas7-Y",
+    "s3YCsOCcfEI",
+    "kP9x2d1E_hY",
+    "n1g6aArl_s8",
+    "FKxwdsJVozY",
+    "o5wyeAnsqzQ",
+    "2m1IaWraAxU",
+    "IpUEkRpm8ZQ",
+    "wBO62lxfYMc",
+    "OVq7CiFqWfk",
+    "CnG1m06KcnU",
+    "DpYn_S2gU1s",
+    "ocH25NyFkDs",
+    "HqphVfNw8pM"
     ]
 
     let currentPage = 1;
