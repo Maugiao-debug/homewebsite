@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const pageNumber = document.getElementById("pageNumber");
 
     const videoLinks = [
-        "296MCRk9eKY",
+     "296MCRk9eKY",
     "99TqSJGd10U",
     "QS1ggZk8M0Q",
     "7ZIXddOFt-M",
