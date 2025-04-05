@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "HqphVfNw8pM","HqphVfNw8pM", "ocH25NyFkDs", "DpYn_S2gU1s", "CnG1m06KcnU", "OVq7CiFqWfk",
         "wBO62lxfYMc", "IpUEkRpm8ZQ", "2m1IaWraAxU", "o5wyeAnsqzQ", "FKxwdsJVozY",
         "n1g6aArl_s8", "kP9x2d1E_hY", "s3YCsOCcfEI", "dCMpVlas7-Y", "75-jm6qiKhs"
-    ].reverse(); // Đảo ngược video mới nhất lên đầu
+    ]
 
     let currentPage = 1;
     const videosPerPage = 6;
